@@ -4,7 +4,7 @@ from timeit import default_timer as timer
 import time
 import os.path
 
-data = pd.read_csv("ques.csv")
+data = pd.read_csv("data_added.csv")
 options = ["A","B","C","D"]
 beginner_count=intermediate_count=advanced_count = 0
 point = 0 
@@ -34,7 +34,7 @@ def run_quiz():
 
 def select_answer():
     starting_time = timer()
-    answer = input("select option : ")
+    answer = input("select option : ").upper()
     end_time = timer()
     time_taken = end_time - starting_time
     return answer,time_taken
@@ -48,13 +48,13 @@ def question(count):
     answer = random_row['Correct Answer']
     level = random_row['Difficulty Level']
     global beginner_count,intermediate_count,advanced_count
-    if level == "Beginner" and beginner_count<=5:
+    if level == "Beginner" and beginner_count<5:
         typing_display(f"{count+1} - {question}")
         beginner_count+=1
-    elif level == "Intermediate" and intermediate_count<=5:
+    elif level == "Intermediate" and intermediate_count<5:
         typing_display(f"{count+1} - {question}")
         intermediate_count+=1
-    elif level == "Advanced" and advanced_count<=5:
+    elif level == "Advanced" and advanced_count<5:
         typing_display(f"{count+1} - {question}")   
         advanced_count+=1
     for i, op in enumerate(random_row[options]):
